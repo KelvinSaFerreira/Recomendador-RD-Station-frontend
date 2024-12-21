@@ -6,9 +6,7 @@ const identifyCategoryCorrespondence = (product, selectedItems, category, result
   return {
     ...product,
     [quantityObjKey]: correspondencesQuantity,
-    [flagObjKey]: selectedItems?.length > 0
-      ? correspondencesQuantity > 0
-      : true,
+    [flagObjKey]: correspondencesQuantity > 0
   };
 };
   
@@ -21,8 +19,8 @@ const sortByDescending = (productA, productB) => {
 
 const getSingleProductRecommendation = (sortedProducts) => {
   const firstProduct = sortedProducts[0];
-  const lastProduct = sortedProducts[sortedProducts.length - 1];
-  const lastProductBetterMatch = sortByDescending(firstProduct, lastProduct) >= 0
+  const lastProduct = sortedProducts.pop();
+  const lastProductBetterMatch = sortByDescending(firstProduct, lastProduct) >= 0;
   return [lastProductBetterMatch ? lastProduct : firstProduct];
 };
 
@@ -37,7 +35,7 @@ const getRecommendations = (
     return product;
   });
 
-  let filteredProductsWithCorrespondence = verifiedCorrespondences.filter(product => product.hasSelectedFeatures && product.hasSelectedPreferences);
+  let filteredProductsWithCorrespondence = verifiedCorrespondences.filter(product => product.hasSelectedFeatures || product.hasSelectedPreferences);
 
   const sortedProducts = filteredProductsWithCorrespondence.sort(sortByDescending);
 

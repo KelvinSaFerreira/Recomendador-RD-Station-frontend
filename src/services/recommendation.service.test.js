@@ -99,22 +99,7 @@ describe("Filtragem de itens", () => {
     });
   });
 
-  it("deve retornar o flag 'true' se selectedItems estiver vazio", () => {
-    const product = { category: ["itemA", "itemB"] };
-    const selectedItems = [];
-    const category = "category";
-    const resultObjKey = "selectedItem";
-
-    const result = recommendationService.identifyCategoryCorrespondence(product, selectedItems, category, resultObjKey);
-
-    expect(result).toEqual({
-      ...product,
-      selectedItemQuantity: 0,
-      hasSelectedItem: true,
-    });
-  });
-
-  it("deve lidar com a ausência de uma chave de categoria no produto", () => {
+  it("deve lidar com a ausência de uma categoria no produto", () => {
     const product = {};
     const selectedItems = ["itemA"];
     const category = "category";
@@ -129,7 +114,7 @@ describe("Filtragem de itens", () => {
     });
   });
 
-  it("deve lidar com valores nulos ou indefinidos para selectedItems", () => {
+  it("deve lidar com valores nulos ou indefinidos nas categorias selecionadas", () => {
     const product = { category: ["itemA", "itemB"] };
     const selectedItems = null;
     const category = "category";
@@ -140,7 +125,7 @@ describe("Filtragem de itens", () => {
     expect(result).toEqual({
       ...product,
       selectedItemQuantity: 0,
-      hasSelectedItem: true,
+      hasSelectedItem: false,
     });
   });
 });

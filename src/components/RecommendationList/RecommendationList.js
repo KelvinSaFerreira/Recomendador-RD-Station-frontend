@@ -17,13 +17,13 @@ function RecommendationList({ recommendations }) {
                 <div className='w-2/4'>
                   <span><strong>Funcionalidades:</strong></span>
                   {recommendation.features.map((feature) => (
-                    <p>- {feature}</p>
+                    <p key={feature}>- {feature}</p>
                   ))}
                 </div>
                 <div className='w-2/4'>
                   <span><strong>Indicado para:</strong></span>
                   {recommendation.preferences.map((preference) => (
-                    <p>- {preference}</p>
+                    <p key={preference}>- {preference}</p>
                   ))}
                 </div>
               </div>
